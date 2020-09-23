@@ -17,8 +17,8 @@ sleep 1;
 
 echo "migrate_token_stat";
 sleep 2;
-./migrate_token_stat.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
+bash migrate_token_stat.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
 
 echo "migrate_token_account";
 sleep 2;
-./migrate_token_account.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
+bash migrate_token_account.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT

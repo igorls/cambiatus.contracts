@@ -16,36 +16,36 @@ $CLEOS set contract $TARGET_CONTRACT ./ -p $TARGET_CONTRACT"@active"
 
 echo "migrate_cmm_actions";
 sleep 5;
-./migrate_cmm_actions.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
+bash migrate_cmm_actions.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
 
 echo "migrate_cmm_checks";
 sleep 5;
-./migrate_cmm_checks.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
+bash migrate_cmm_checks.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
 
 echo "migrate_cmm_claims";
 sleep 5;
-./migrate_cmm_claims.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
+bash migrate_cmm_claims.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
 
 echo "migrate_cmm_communities";
 sleep 5;
-./migrate_cmm_communities.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
+bash migrate_cmm_communities.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
 
 echo "migrate_cmm_indexes";
 sleep 5;
-./migrate_cmm_indexes.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
+bash migrate_cmm_indexes.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
 
 echo "migrate_cmm_network";
 sleep 5;
-./migrate_cmm_network.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
+bash migrate_cmm_network.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
 
 echo "migrate_cmm_objectives";
 sleep 5;
-./migrate_cmm_objectives.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
+bash migrate_cmm_objectives.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
 
 echo "migrate_cmm_sales";
 sleep 5;
-./migrate_cmm_sales.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
+bash migrate_cmm_sales.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
 
 echo "migrate_cmm_validators";
 sleep 5;
-./migrate_cmm_validators.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
+bash migrate_cmm_validators.sh $API_URL $SOURCE_CONTRACT $TARGET_CONTRACT
