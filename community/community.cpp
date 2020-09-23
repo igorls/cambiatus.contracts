@@ -1,6 +1,51 @@
 #include "community.hpp"
 #include "../utils/utils.cpp"
 
+// --- single scope tables (bes.cmm)
+
+// action
+
+// check
+
+// claim
+
+// community
+
+// indexes
+
+// itemindex
+
+// network (add user_type=natural)
+
+void cambiatus::mnetwork()
+{
+  require_auth(_self);
+  networks old_networks("bes.cmm"_n, "bes.cmm"_n.value);
+  networks new_networks(get_self(), get_self().value);
+  for_each(old_networks.begin(), old_networks.end(), [&](const cambiatus::network& c) {
+    eosio::print(c.community,"\n");
+    new_networks.emplace(get_self(), [&](auto &a) {
+      a.id = c.id;
+      a.community = c.community;
+      a.invited_user = c.invited_user;
+      a.invited_by = c.invited_by;
+      a.user_type = "natural";
+    });
+  });
+}
+
+// objaction
+
+// objective
+
+// sale
+
+// sale........1
+
+// --- multi scope tables
+
+// validator
+
 void cambiatus::create(eosio::asset cmm_asset, eosio::name creator, std::string logo,
                        std::string name, std::string description,
                        eosio::asset inviter_reward, eosio::asset invited_reward,
@@ -1078,4 +1123,5 @@ EOSIO_DISPATCH(cambiatus,
                (createsale)(updatesale)(deletesale)(reactsale)(transfersale) // Shop
                (setindices)(deleteobj)(deleteact)                            // Admin actions
                (migrate)(clean)(migrateafter)                                // Temporary migration actions
+               (mnetwork)                                                    // Account migration actions
 );

@@ -1,6 +1,38 @@
 #include "token.hpp"
 #include "../utils/utils.cpp"
 
+void token::macct(eosio::name scope)
+{
+  require_auth(_self);
+  accounts old_accts(eosio::name("bes.token"), scope.value);
+  accounts new_accts(_self, scope.value);
+  auto itr_start = old_accts.begin();
+  auto itr_end = old_accts.end();
+  for (; itr_start != itr_end; itr_start++)
+  {
+    new_accts.emplace(_self, [&](auto &a) {
+      a.balance = itr_start->balance;
+      a.last_activity = itr_start->last_activity;
+    });
+  }
+}
+
+void token::mstat(eosio::asset max_supply)
+{
+  require_auth(_self);
+  auto sym = max_supply.symbol.code().raw();
+  stats old_stats(eosio::name("bes.token"), sym);
+  stats new_stats(_self, sym);
+  auto existing = old_stats.find(sym);
+  new_stats.emplace(_self, [&](auto &s) {
+    s.supply = existing->supply;
+    s.max_supply = existing->max_supply;
+    s.min_balance = existing->min_balance;
+    s.issuer = existing->issuer;
+    s.type = existing->type;
+  });
+}
+
 /**
    Creates a Cambiatus token.
    @author Julien Lucca
@@ -436,4 +468,5 @@ void token::add_balance(eosio::name recipient, eosio::asset value, const token::
 }
 
 EOSIO_DISPATCH(token,
-               (create)(update)(issue)(transfer)(retire)(setexpiry)(initacc));
+               (create)(update)(issue)(transfer)(retire)(setexpiry)(initacc)
+               (macct)(mstat));

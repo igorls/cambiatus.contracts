@@ -46,6 +46,14 @@ public:
   };
 
   /// @abi action
+  /// Migrate a scope
+  ACTION macct(eosio::name scope);
+
+  /// @abi action
+  /// Migrate a scope
+  ACTION mstat(eosio::asset max_supply);
+
+  /// @abi action
   /// Create a new BeSpiral Token
   ACTION create(eosio::name issuer, eosio::asset max_supply, eosio::asset min_balance, std::string type);
 

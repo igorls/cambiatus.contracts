@@ -156,6 +156,10 @@ public:
   };
 
   /// @abi action
+  /// Migrate a scope
+  ACTION mnetwork();
+
+  /// @abi action
   /// Creates a cambiatus community
   ACTION create(eosio::asset cmm_asset, eosio::name creator, std::string logo, std::string name,
                 std::string description, eosio::asset inviter_reward, eosio::asset invited_reward,
