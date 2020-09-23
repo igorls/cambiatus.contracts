@@ -4,3 +4,7 @@ _stat_scopes
 _acct_scopes
 _validator_scopes
 cambiatus_contracts_migration.tar.gz
+community/*.wasm
+community/*.abi
+token/*.abi
+token/*.wasm
