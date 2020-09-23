@@ -4,10 +4,105 @@
 // --- single scope tables (bes.cmm)
 
 // action
+void cambiatus::maction(uint16_t start, uint16_t limit, bool debug)
+{
+  require_auth(_self);
+  auto fromContract = eosio::name("bes.cmm");
+  actions old_actions(fromContract, fromContract.value);
+  actions new_actions(get_self(), get_self().value);
+  uint16_t position = 0;
+  for (auto itr = old_actions.cbegin(); itr != old_actions.cend() && position < start + limit; ++itr)
+  {
+    if (position >= start)
+    {
+      if (!debug)
+      {
+        new_actions.emplace(get_self(), [&](auto &a) {
+          a.id = itr->id;
+          a.objective_id = itr->objective_id;
+          a.description = itr->description;
+          a.reward = itr->reward;
+          a.verifier_reward = itr->verifier_reward;
+          a.deadline = itr->deadline;
+          a.usages = itr->usages;
+          a.usages_left = itr->usages_left;
+          a.verifications = itr->verifications;
+          a.verification_type = itr->verification_type;
+          a.is_completed = itr->is_completed;
+          a.creator = itr->creator;
+        });
+        eosio::print("Added: ", itr->id, "\n");
+      }
+      else
+      {
+        eosio::print(itr->id, "\n");
+      }
+    }
+    position++;
+  }
+}
 
 // check
+void cambiatus::mcheck(uint16_t start, uint16_t limit, bool debug)
+{
+  require_auth(_self);
+  auto fromContract = eosio::name("bes.cmm");
+  checks old_checks(fromContract, fromContract.value);
+  checks new_checks(get_self(), get_self().value);
+  uint16_t position = 0;
+  for (auto itr = old_checks.cbegin(); itr != old_checks.cend() && position < start + limit; ++itr)
+  {
+    if (position >= start)
+    {
+      if (!debug)
+      {
+        new_checks.emplace(get_self(), [&](auto &a) {
+          a.id = itr->id;
+          a.claim_id = itr->claim_id;
+          a.validator = itr->validator;
+          a.is_verified = itr->is_verified;
+        });
+        eosio::print("Added: ", itr->id, "\n");
+      }
+      else
+      {
+        eosio::print(itr->id, "\n");
+      }
+    }
+    position++;
+  }
+}
 
 // claim
+void cambiatus::mclaim(uint16_t start, uint16_t limit, bool debug)
+{
+  require_auth(_self);
+  auto fromContract = eosio::name("bes.cmm");
+  claims old_claims(fromContract, fromContract.value);
+  claims new_claims(get_self(), get_self().value);
+  uint16_t position = 0;
+  for (auto itr = old_claims.cbegin(); itr != old_claims.cend() && position < start + limit; ++itr)
+  {
+    if (position >= start)
+    {
+      if (!debug)
+      {
+        new_claims.emplace(get_self(), [&](auto &a) {
+          a.id = itr->id;
+          a.action_id = itr->action_id;
+          a.claimer = itr->claimer;
+          a.status = itr->status;
+        });
+        eosio::print("Added: ", itr->id, "\n");
+      }
+      else
+      {
+        eosio::print(itr->id, "\n");
+      }
+    }
+    position++;
+  }
+}
 
 // community
 
@@ -16,22 +111,36 @@
 // itemindex
 
 // network (add user_type=natural)
-
-void cambiatus::mnetwork()
+void cambiatus::mnetwork(uint16_t start, uint16_t limit, bool debug)
 {
   require_auth(_self);
-  networks old_networks("bes.cmm"_n, "bes.cmm"_n.value);
+  auto fromContract = eosio::name("bes.cmm");
+  oldnetworks old_networks(fromContract, fromContract.value);
   networks new_networks(get_self(), get_self().value);
-  for_each(old_networks.begin(), old_networks.end(), [&](const cambiatus::network& c) {
-    eosio::print(c.community,"\n");
-    new_networks.emplace(get_self(), [&](auto &a) {
-      a.id = c.id;
-      a.community = c.community;
-      a.invited_user = c.invited_user;
-      a.invited_by = c.invited_by;
-      a.user_type = "natural";
-    });
-  });
+  std::string natural = "natural";
+  uint16_t position = 0;
+  for (auto itr = old_networks.cbegin(); itr != old_networks.cend() && position < start + limit; ++itr)
+  {
+    if (position >= start)
+    {
+      if (!debug)
+      {
+        new_networks.emplace(get_self(), [&](auto &a) {
+          a.id = itr->id;
+          a.community = itr->community;
+          a.invited_user = itr->invited_user;
+          a.invited_by = itr->invited_by;
+          a.user_type = natural;
+        });
+        eosio::print("Added: ", itr->id, " - ", itr->community, "\n");
+      }
+      else
+      {
+        eosio::print(itr->id, " - ", itr->community, "\n");
+      }
+    }
+    position++;
+  }
 }
 
 // objaction
@@ -1123,5 +1232,4 @@ EOSIO_DISPATCH(cambiatus,
                (createsale)(updatesale)(deletesale)(reactsale)(transfersale) // Shop
                (setindices)(deleteobj)(deleteact)                            // Admin actions
                (migrate)(clean)(migrateafter)                                // Temporary migration actions
-               (mnetwork)                                                    // Account migration actions
-);
+               (mnetwork)(maction)(mcheck)(mclaim));

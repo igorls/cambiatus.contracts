@@ -10,6 +10,37 @@ class [[eosio::contract("community")]] cambiatus : public eosio::contract
 public:
   using contract::contract;
 
+  // ---------- MIGRATION
+  // old network type for migration
+  TABLE oldnetwork
+  {
+    std::uint64_t id;
+    eosio::symbol community;
+    eosio::name invited_user;
+    eosio::name invited_by;
+    std::uint64_t primary_key() const { return id; }
+    std::uint64_t users_by_cmm() const { return community.raw(); }
+    EOSLIB_SERIALIZE(oldnetwork, (id)(community)(invited_user)(invited_by));
+  };
+  typedef eosio::multi_index<eosio::name{"network"}, cambiatus::oldnetwork, eosio::indexed_by<eosio::name{"usersbycmm"}, eosio::const_mem_fun<cambiatus::oldnetwork, uint64_t, &cambiatus::oldnetwork::users_by_cmm>>> oldnetworks;
+
+  ACTION mnetwork(uint16_t start, uint16_t limit, bool debug);
+  ACTION maction(uint16_t start, uint16_t limit, bool debug);
+  ACTION mcheck(uint16_t start, uint16_t limit, bool debug);
+  ACTION mclaim(uint16_t start, uint16_t limit, bool debug);
+
+  // ------------ END MIGRATION
+
+
+
+
+
+
+
+
+
+
+
   TABLE community
   {
     eosio::symbol symbol;
@@ -154,10 +185,6 @@ public:
     std::uint64_t last_used_action_id;
     std::uint64_t last_used_claim_id;
   };
-
-  /// @abi action
-  /// Migrate a scope
-  ACTION mnetwork();
 
   /// @abi action
   /// Creates a cambiatus community
