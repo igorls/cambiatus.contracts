@@ -12,7 +12,7 @@ public:
 
   // ---------- MIGRATION
   // old network type for migration
-  TABLE oldnetwork
+  struct [[eosio::table("network"), eosio::contract("bes.cmm")]] oldnetwork
   {
     std::uint64_t id;
     eosio::symbol community;
@@ -24,22 +24,30 @@ public:
   };
   typedef eosio::multi_index<eosio::name{"network"}, cambiatus::oldnetwork, eosio::indexed_by<eosio::name{"usersbycmm"}, eosio::const_mem_fun<cambiatus::oldnetwork, uint64_t, &cambiatus::oldnetwork::users_by_cmm>>> oldnetworks;
 
+  struct [[eosio::table("community"), eosio::contract("bes.cmm")]] oldcommunity
+  {
+    eosio::symbol symbol;
+    eosio::name creator;
+    std::string logo;
+    std::string name;
+    std::string description;
+    eosio::asset inviter_reward;
+    eosio::asset invited_reward;
+    std::uint8_t has_objectives;
+    std::uint8_t has_shop;
+    uint64_t primary_key() const { return symbol.raw(); };
+    EOSLIB_SERIALIZE(oldcommunity,(symbol)(creator)(logo)(name)(description)(inviter_reward)(invited_reward)(has_objectives)(has_shop));
+  };
+  typedef eosio::multi_index<eosio::name{"community"}, cambiatus::oldcommunity> oldcommunities;
+
   ACTION mnetwork(uint16_t start, uint16_t limit, bool debug);
   ACTION maction(uint16_t start, uint16_t limit, bool debug);
   ACTION mcheck(uint16_t start, uint16_t limit, bool debug);
   ACTION mclaim(uint16_t start, uint16_t limit, bool debug);
+  ACTION mcommunity(uint16_t start, uint16_t limit, bool debug);
+  ACTION mindexes();
 
   // ------------ END MIGRATION
-
-
-
-
-
-
-
-
-
-
 
   TABLE community
   {

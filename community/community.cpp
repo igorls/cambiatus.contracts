@@ -105,8 +105,51 @@ void cambiatus::mclaim(uint16_t start, uint16_t limit, bool debug)
 }
 
 // community
+void cambiatus::mcommunity(uint16_t start, uint16_t limit, bool debug)
+{
+  require_auth(_self);
+  auto fromContract = eosio::name("bes.cmm");
+  oldcommunities old_communities(fromContract, fromContract.value);
+  communities new_communities(get_self(), get_self().value);
+  uint16_t position = 0;
+  for (auto itr = old_communities.cbegin(); itr != old_communities.cend() && position < start + limit; ++itr)
+  {
+    if (position >= start)
+    {
+      if (!debug)
+      {
+        new_communities.emplace(get_self(), [&](auto &a) {
+          a.symbol = itr->symbol;
+          a.creator = itr->creator;
+          a.logo = itr->logo;
+          a.name = itr->name;
+          a.description = itr->description;
+          a.inviter_reward = itr->inviter_reward;
+          a.invited_reward = itr->invited_reward;
+          a.has_objectives = itr->has_objectives;
+          a.has_shop = itr->has_shop;
+          a.has_kyc = 0;
+        });
+        eosio::print("Added: ", itr->symbol, "\n");
+      }
+      else
+      {
+        eosio::print(itr->symbol, "\n");
+      }
+    }
+    position++;
+  }
+}
 
 // indexes
+void cambiatus::mindexes()
+{
+  require_auth(_self);
+  auto fromContract = eosio::name("bes.cmm");
+  item_indexes old_indexes(fromContract,fromContract.value);
+  item_indexes new_indexes(get_self(), get_self().value);
+  new_indexes.set(old_indexes.get(), _self);
+}
 
 // itemindex
 
@@ -1232,4 +1275,4 @@ EOSIO_DISPATCH(cambiatus,
                (createsale)(updatesale)(deletesale)(reactsale)(transfersale) // Shop
                (setindices)(deleteobj)(deleteact)                            // Admin actions
                (migrate)(clean)(migrateafter)                                // Temporary migration actions
-               (mnetwork)(maction)(mcheck)(mclaim));
+               (mnetwork)(maction)(mcheck)(mclaim)(mcommunity)(mindexes));
