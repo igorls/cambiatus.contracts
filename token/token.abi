@@ -1,0 +1,300 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT ",
+    "version": "eosio::abi/1.1",
+    "types": [],
+    "structs": [
+        {
+            "name": "account",
+            "base": "",
+            "fields": [
+                {
+                    "name": "balance",
+                    "type": "asset"
+                },
+                {
+                    "name": "last_activity",
+                    "type": "uint32"
+                }
+            ]
+        },
+        {
+            "name": "create",
+            "base": "",
+            "fields": [
+                {
+                    "name": "issuer",
+                    "type": "name"
+                },
+                {
+                    "name": "max_supply",
+                    "type": "asset"
+                },
+                {
+                    "name": "min_balance",
+                    "type": "asset"
+                },
+                {
+                    "name": "type",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "currency_stats",
+            "base": "",
+            "fields": [
+                {
+                    "name": "supply",
+                    "type": "asset"
+                },
+                {
+                    "name": "max_supply",
+                    "type": "asset"
+                },
+                {
+                    "name": "min_balance",
+                    "type": "asset"
+                },
+                {
+                    "name": "issuer",
+                    "type": "name"
+                },
+                {
+                    "name": "type",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "expiry_options",
+            "base": "",
+            "fields": [
+                {
+                    "name": "currency",
+                    "type": "symbol"
+                },
+                {
+                    "name": "natural_expiration_period",
+                    "type": "uint32"
+                },
+                {
+                    "name": "juridical_expiration_period",
+                    "type": "uint32"
+                },
+                {
+                    "name": "renovation_amount",
+                    "type": "asset"
+                }
+            ]
+        },
+        {
+            "name": "initacc",
+            "base": "",
+            "fields": [
+                {
+                    "name": "currency",
+                    "type": "symbol"
+                },
+                {
+                    "name": "account",
+                    "type": "name"
+                },
+                {
+                    "name": "inviter",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "issue",
+            "base": "",
+            "fields": [
+                {
+                    "name": "to",
+                    "type": "name"
+                },
+                {
+                    "name": "quantity",
+                    "type": "asset"
+                },
+                {
+                    "name": "memo",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "macct",
+            "base": "",
+            "fields": [
+                {
+                    "name": "scope",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "mstat",
+            "base": "",
+            "fields": [
+                {
+                    "name": "max_supply",
+                    "type": "asset"
+                }
+            ]
+        },
+        {
+            "name": "retire",
+            "base": "",
+            "fields": [
+                {
+                    "name": "currency",
+                    "type": "symbol"
+                },
+                {
+                    "name": "user_type",
+                    "type": "string"
+                },
+                {
+                    "name": "memo",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "setexpiry",
+            "base": "",
+            "fields": [
+                {
+                    "name": "currency",
+                    "type": "symbol"
+                },
+                {
+                    "name": "natural_expiration_period",
+                    "type": "uint32"
+                },
+                {
+                    "name": "juridical_expiration_period",
+                    "type": "uint32"
+                },
+                {
+                    "name": "renovation_amount",
+                    "type": "asset"
+                }
+            ]
+        },
+        {
+            "name": "transfer",
+            "base": "",
+            "fields": [
+                {
+                    "name": "from",
+                    "type": "name"
+                },
+                {
+                    "name": "to",
+                    "type": "name"
+                },
+                {
+                    "name": "quantity",
+                    "type": "asset"
+                },
+                {
+                    "name": "memo",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "update",
+            "base": "",
+            "fields": [
+                {
+                    "name": "max_supply",
+                    "type": "asset"
+                },
+                {
+                    "name": "min_balance",
+                    "type": "asset"
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "name": "create",
+            "type": "create",
+            "ricardian_contract": "---\nspec-version: 0.0.1\ntitle: create placeholder\nsummary: placeholder\nicon:"
+        },
+        {
+            "name": "initacc",
+            "type": "initacc",
+            "ricardian_contract": "---\nspec-version: 0.0.1\ntitle: initacc placeholder\nsummary: placeholder\nicon:"
+        },
+        {
+            "name": "issue",
+            "type": "issue",
+            "ricardian_contract": "---\nspec-version: 0.0.1\ntitle: issue placeholder\nsummary: placeholder\nicon:"
+        },
+        {
+            "name": "macct",
+            "type": "macct",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "mstat",
+            "type": "mstat",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "retire",
+            "type": "retire",
+            "ricardian_contract": "---\nspec-version: 0.0.1\ntitle: retire placeholder\nsummary: placeholder\nicon:"
+        },
+        {
+            "name": "setexpiry",
+            "type": "setexpiry",
+            "ricardian_contract": "---\nspec-version: 0.0.1\ntitle: setexpiry placeholder\nsummary: placeholder\nicon:"
+        },
+        {
+            "name": "transfer",
+            "type": "transfer",
+            "ricardian_contract": "---\nspec-version: 0.0.1\ntitle: transfer placeholder\nsummary: placeholder\nicon:"
+        },
+        {
+            "name": "update",
+            "type": "update",
+            "ricardian_contract": "---\nspec-version: 0.0.1\ntitle: update placeholder\nsummary: placeholder\nicon:"
+        }
+    ],
+    "tables": [
+        {
+            "name": "accounts",
+            "type": "account",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "expiryopts",
+            "type": "expiry_options",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "stat",
+            "type": "currency_stats",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        }
+    ],
+    "ricardian_clauses": [
+        {
+            "id": "Data Storage",
+            "body": "---\nspec-version: 0.0.1\ntitle: General Data Storage\nsummary: This smart contract will store data added by the user. The user consents to the storage of this data by signing the transaction.\nicon:"
+        }
+    ],
+    "variants": []
+}
