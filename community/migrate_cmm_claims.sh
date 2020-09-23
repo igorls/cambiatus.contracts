@@ -1,8 +1,7 @@
 #!/bin/bash
-CLEOS="cleos -u http://192.168.10.201:18888"
-
-SOURCE_CONTRACT="bes.cmm";
-TARGET_CONTRACT="bes4.cmm";
+CLEOS="cleos -u $1";
+SOURCE_CONTRACT=$2;
+TARGET_CONTRACT=$3;
 TABLE_NAME="claim";
 
 # count source rows
@@ -11,7 +10,7 @@ SOURCE_ROWS=$($CLEOS get table $SOURCE_CONTRACT $SOURCE_CONTRACT $TABLE_NAME --l
 function migrate {
     echo "From $1";
     $CLEOS push action $TARGET_CONTRACT mclaim "[$1,100,false]" -p $TARGET_CONTRACT"@active" -j | jq -r ".processed.action_traces[].console"
-    sleep 0.5;
+    sleep 1;
 }
 
 migrate 0

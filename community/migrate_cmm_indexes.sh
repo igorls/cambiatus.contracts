@@ -1,8 +1,7 @@
 #!/bin/bash
-CLEOS="cleos -u http://192.168.10.201:18888"
-
-SOURCE_CONTRACT="bes.cmm";
-TARGET_CONTRACT="bes4.cmm";
+CLEOS="cleos -u $1";
+SOURCE_CONTRACT=$2;
+TARGET_CONTRACT=$3;
 TABLE_NAME="indexes";
 
 # print source singleton

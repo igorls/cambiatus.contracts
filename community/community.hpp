@@ -46,6 +46,9 @@ public:
   ACTION mclaim(uint16_t start, uint16_t limit, bool debug);
   ACTION mcommunity(uint16_t start, uint16_t limit, bool debug);
   ACTION mindexes();
+  ACTION mobjective(uint16_t start, uint16_t limit, bool debug);
+  ACTION msale(uint16_t start, uint16_t limit, bool debug);
+  ACTION mvalidator(eosio::name scope, bool debug);
 
   // ------------ END MIGRATION
 
