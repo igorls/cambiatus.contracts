@@ -1,2 +1,6 @@
 setup.sh
 .vscode
+_stat_scopes
+_acct_scopes
+_validator_scopes
+cambiatus_contracts_migration.tar.gz
